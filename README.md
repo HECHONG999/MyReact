@@ -1,4 +1,4 @@
-### 脚手架的使用 ###
+## 脚手架的使用 ##
 1. 创建一个react工程项目  yarn create react-app + 项目名字
 2. 使用第三方插件: nextjs umijs
 
