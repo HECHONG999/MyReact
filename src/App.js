@@ -1,14 +1,10 @@
-import React from 'react';
-// import Comp from "./components/Comp"
-// import Comp from "./components/CompCopy1"
-import Comp from "./components/CompCopy2"
+import React, { Component } from 'react';
+class App extends Component{
 
-class  App extends React.Component {
- 
   render () {
     return (
       <div>
-          <Comp />
+         我是App
       </div>
     );
   }
