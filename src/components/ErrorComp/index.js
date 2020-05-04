@@ -6,7 +6,7 @@ export default class ErrorComponent extends Component {
         hasError: false
     }
     
-    // 该生命周期函数会再子组件发生错误之后,页面更新之前调用
+    // 该生命周期函数会再子组件发生错误之后,页面更新之前调用, 返回值会覆盖state的状态
    static  getDerivedStateFromError(error) {
         console.log(error, "ErrorComponent");
         console.log("错误发生了");
