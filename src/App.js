@@ -1,30 +1,35 @@
 import React, { useState ,useEffect} from 'react';
-import useAllstudents from "./components/myHooks/getAllstudent"
+import useReducer from "./useReducer"
 
-function Test() {
-  // 通过自定义Hook, 发送ajax请求获取数据
-  let resp =  useAllstudents()
-  if( resp ) {
-    const list = resp.map( it => {
-        return <li key={it.id}>姓名: {it.name} 地址: {it.address}</li>
-    })
-
-    return (
-      <div>
-          <h1>数据总条数: {resp.cont}</h1>
-          <ul>
-            {list}
-          </ul>
-      </div>
-    )
+/**
+ * 该函数，根据当前的数据，和action类型如何去改变数据，生成一个新的数据返回
+ * @param {*} state 改变的数据
+ * @param {*} action 
+ */
+function reducer(state, action) {
+  switch(action.type) {
+    case "increase":
+      return state + 1;
+    case "decrease":
+      if(state == 0) {
+        return 0;
+      }
+      return state - 1;
+      default:
+      return state
   }
-  return null
-}
-
+} 
 function App() { 
+  const [state, dispatch] =  useReducer(reducer, 10)
   return (
      <div>
-       <Test />
+       <button onClick={ () => {
+         dispatch({ type: "increase" })
+       }}>+</button>
+        <p>{state}</p>
+        <button onClick={ () => {
+          dispatch({ type: "decrease" })
+        }}>-</button>
      </div>
     )
 }
