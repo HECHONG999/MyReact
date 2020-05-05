@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useContext, useState } from 'react';
 // useCallback
 
 class Test extends React.PureComponent {
@@ -12,17 +12,14 @@ class Test extends React.PureComponent {
 }
 
 function Parent() {
-  console.log("parent Render")
   const [txt, setTxt] = useState("123456");
-  const [n, setN]  = useState(0);
-  // useCallback： 用于固定一个函数的引用,只有当txt依赖的值发生变化时才会更新该函数的引用
-  const handleClick = useCallback( () => {
-    setTxt( txt + 1 )
-  }, [txt])
+  const [n, setN]  = useState(0)
   return (
     <div> 
       {/* onClick每一次render都会产生一个新函数地址的引用 */}
-      <Test txt={txt} onClick={ handleClick }/>
+      <Test txt={txt} onClick={ () => {
+        setTxt(Math.random());
+      }}/>
 
       {/* 这里改变state的数据, 只是父组件改变了数据, Test组件采用了优化,不会发生更新 */}
       <input type="number" value={n} onChange={ (e) => {
