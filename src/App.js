@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 // 创建一个上下文对象
-// 
+// 子组件可用该上下文,获取父组件的数据
 const ctx = React.createContext()
 
 function Test() {
