@@ -1,5 +1,6 @@
-# Memo Hook
+# LayoutEffect Hook
 
-用于保持一些比较稳定的数据，通常用于性能优化
+useEffect：浏览器渲染完成后，用户看到新的渲染结果之后
+useLayoutEffectHook：完成了DOM改动，但还没有呈现给用户
 
-**如果React元素本身的引用没有发生变化，一定不会重新渲染**
+应该尽量使用useEffect，因为它不会导致渲染阻塞，如果出现了问题，再考虑使用useLayoutEffectHook
