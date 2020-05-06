@@ -1,45 +1,44 @@
-import React, { useCallback, useState , useMemo} from 'react';
+import React, { useImperativeHandle,useRef } from 'react';
 
-// useMemo 该函数接收一个函数作为参数，必须返回一个函数, 返回的函数写的功能与Callback一样
-// 功能: 用于固定一个函数的索引地址
-class Test extends React.PureComponent {
-  render() {
-      console.log("Test Render")
-      return <div>
-          <h1>{this.props.text}</h1>
-          <button onClick={this.props.onClick}>改变文本</button>
-      </div>
-  }
-}
-
-function Parent() {
-  console.log("parent Render")
-  const [txt, setTxt] = useState("123456");
-  const [n, setN]  = useState(0);
-  // useCallback： 用于固定一个函数的引用,只有当txt依赖的值发生变化时才会更新该函数的引用
-  const handleClick = useMemo( () => {
-    return () => {
-      setTxt( txt + 1 )
+function Test(props, testRef) {
+  // useImperativeHandle用于获取函数组件的方法调用
+  useImperativeHandle(testRef, () => {
+    //如果不给依赖项，则每次运行函数组件都会调用该方法
+    //如果使用了依赖项，则第一次调用后，会进行缓存，只有依赖项发生变化时才会重新调用函数
+    //相当于给 ref.current = 1
+    return {
+        method(){
+            console.log("Test Component Called")
+        }
     }
-  }, [txt])
-  return (
-    <div> 
-      {/* onClick每一次render都会产生一个新函数地址的引用 */}
-         {/* 函数的地址每次渲染都发生了变化，导致了子组件跟着重新渲染，若子组件是经过优化的组件，则可能导致优化失效 */}
-      <Test txt={txt} onClick={ handleClick }/>
-
-      {/* 这里改变state的数据, 只是父组件改变了数据, Test组件采用了优化,不会发生更新 */}
-      <input type="number" value={n} onChange={ (e) => {
-          setN(e.target.value)
-      }}></input>
-    </div>
-  )
+}, [])
+  return <h1>我是Test组件</h1>
 }
 
+// class Test extends React.PureComponent {
+//   method () {
+//     console.log("TEST method方法调用")
+//     return "喜欢你"
+//   }
+  
+//   render () {
+//     return (
+//       <div>我是Test组件</div>
+//     )
+//   }
+// }
+
+// 使用forwardRef转发, 用于获取函数组件的内的Dom,或者配合useImperativeHandle获取函数组件内的方法调用
+const TestRef = React.forwardRef(Test)
+// const testRef = React.createRef()
 function App() { 
+  const testRef = React.createRef()
   return (
      <div>
-        <Parent />
+       <TestRef ref={testRef}/>
+       <button onClick={ () => {
+         console.log(testRef.current.method())
+       }}>调用method方法</button>
      </div>
     )
 }
