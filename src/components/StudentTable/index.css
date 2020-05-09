@@ -1,0 +1,13 @@
+.tab {
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+    /* 设置表格边框合并 */
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+th, td {
+    padding: 5px 0;
+    border: 1px solid #ddd;
+}
