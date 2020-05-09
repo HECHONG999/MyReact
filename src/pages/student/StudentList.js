@@ -28,7 +28,11 @@ function upDateLocation(newQuery, history) {
     history.push("?"+ search)
 }
 
-
+/**
+ * 向服务器发送jaax请求获取数据
+ * @param {*} self 
+ * @param {*} querys 
+ */
 async function getStudent(self, querys) {
     const key = querys.key;
     const sex = querys.sex;
@@ -66,6 +70,7 @@ export default class StudentList extends Component {
                             key: result.key,
                             sex: result.sex,
                        }
+                        // 按关键字查询学生, 设置字段向服务器请求数据
                         getStudent(this ,newQuery)
                         // 1、改变url地址参数
                         upDateLocation(newQuery, this.props.history)
@@ -90,3 +95,11 @@ export default class StudentList extends Component {
         )
     }
 }
+
+
+/**
+ * 总结: 
+ * 难点: 
+ *     1、通过查询关键字,向服务器发送请求,请求的参数设置到url地址上有利于分享网页链接
+ *     2、通过upDateLocation函数, 通过histor.push(url参数) 来更新url地址
+ */
