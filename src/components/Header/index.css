@@ -1,0 +1,14 @@
+.header-content {
+    padding: 0px 20px;
+}
+
+.header-content .left {
+    float: left;
+    line-height: 60px;
+}
+
+.header-content .right {
+    float: right;
+    line-height: 60px;
+
+}

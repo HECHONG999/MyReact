@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.container .header { 
+    height: 60px;
+    background: #333;
+    color: #fff;
+}
+.container .content {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.container .content .aside {
+    width: 200px;
+    background-color: lightblue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.main {
+   position: absolute;
+   left: 200px;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   background-color: lightcoral;
+}

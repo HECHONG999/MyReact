@@ -1,0 +1,22 @@
+.menu {
+    text-align: center;
+}
+
+.menu li {
+    list-style: none;
+    padding: 10px 0;
+    background-color: lightslategrey;
+}
+
+.menu li:first-child{
+    background-color: #ddd;
+}
+.menu li:first-child a{
+    color: #f40;
+}
+
+
+.menu li a {
+    color: #fff;
+    text-decoration: none;  
+}
