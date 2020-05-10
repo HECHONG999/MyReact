@@ -38,4 +38,4 @@ function dealRouter(router, baseUrl) {
 
 dealRouter(routerConig, "")
 
-console.log(routerConig)
+export default routerConig
