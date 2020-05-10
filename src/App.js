@@ -1,29 +1,41 @@
 import React, { } from 'react';
 import { BrowserRouter as Router, Route, Switch ,Link, NavLink,Redirect} from "react-router-dom"
-// import Link from './Link'
-import "./App.css"
-function A() {
-  return <div>A组件</div>
+
+function User(props) {
+  console.log(props)
+  return <div>
+      <h1>固定区域</h1>
+        <p>
+          <Link to="/user/info">用户信息</Link>
+          <Link to="/user/pay">用户充值</Link>
+        </p>
+        <div 
+            style={{
+              width: 600,
+              height: 500,
+              border:"1px solid black"
+            }}
+        >
+            <Route path="/user/info" component={UserInfo}/>
+            <Route path="/user/pay" component={UserPay}/>
+        </div>
+  </div>
 }
 
-function B() {
-  return <div>B组件</div>
+
+function UserInfo() {
+  return <div>修改用户信息</div>
 }
 
+function UserPay() {
+  return <div>用户充值</div>
+}
 
 function App() {
   return (
     <div>
       <Router>
-              <NavLink to="/a" strict exact sensitive="true" activeClassName="selected" activeStyle={{background: "red"}}>去A页面</NavLink>
-              <NavLink to="/b" activeClassName="selected" activeStyle={{background: "blue"}}>去B页面</NavLink>
-
-              <Route path="/a/" component={A}/>
-              <Route path="/b" component={B}/>
-
-              <Redirect from="/b:id" to="/a:id"/>
-              <Redirect from="/aaa/bbb:id" to="/bbb/ccc:id"/>
-
+          <Route path="/" component={User}/>
       </Router>
     </div>
   )
