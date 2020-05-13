@@ -21,3 +21,10 @@
     display: none
 }
 
+
+.exit {
+    transition: 1s;
+    transform: scale(0);
+}
+
+
