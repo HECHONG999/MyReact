@@ -18,7 +18,7 @@ export default function App() {
             <Transition in={inProp} timeout={{
                                     appear: 500,
                                     enter: 3000,
-                                    exit: 1000,
+                                    exit: 500,
                                 }}
                 addEndListener={(node, done) => {  //done()  立即变为结束转台
                     node.addEventListener("transitionend", () => {
