@@ -17,35 +17,7 @@
     width: 100%;
 }
 
-
-
-
-/* 还没有进入之前 */
-.enter,
-.appear{
-    display: "block";
-    opacity: 0;
-    transform: translateX(300px);
-    transition: 1s;
+.exit-done {
+    display: none
 }
-
-/* 进入组件时 */
-.enter-active,
-.appear-active {
-    opacity: 1;
-    transform: translateX(0px);
-}
-
-
-/* 组件退出时 */
-.exit-active {
-    transition: 1s;
-    opacity: 0;
-    transform: translateX(-300px);
-}
-/* 完成退出后隐藏 */
-.exit-done{
-    display: none;
-}
-
 

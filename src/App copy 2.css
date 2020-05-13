@@ -1,0 +1,51 @@
+.container {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.com-wrapper {
+    position: relative;
+    height: 100px;
+}
+
+.com-wrapper .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+
+
+
+/* 还没有进入之前 */
+.enter,
+.appear{
+    display: "block";
+    opacity: 0;
+    transform: translateX(300px);
+    transition: 1s;
+}
+
+/* 进入组件时 */
+.enter-active,
+.appear-active {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+
+/* 组件退出时 */
+.exit-active {
+    transition: 1s;
+    opacity: 0;
+    transform: translateX(-300px);
+}
+/* 完成退出后隐藏 */
+.exit-done{
+    display: none;
+}
+
+

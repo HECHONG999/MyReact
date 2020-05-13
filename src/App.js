@@ -1,38 +1,52 @@
 import React, { useState } from 'react'
+import { CSSTransition } from "react-transition-group";
+import "./App.css";
+import "animate.css";
+let duration = 800;
 
-import { Transition, CSSTransition } from "react-transition-group";
-import "./App.css"
-let duration = 1000;
-
-
-function Comp1(props) {
-    // mountOnEnter属性: 子组件会根据父组件立即进行挂载, 如果父组件没挂载,子组件就不进行挂载
-   return <CSSTransition   mountOnEnter  timeout={duration} in={props.visible}>
-              <div className="title">
-                <h1>Comp1</h1>
-                <div>我是一个标题</div>
-              </div>
+function MyTransition(props) {
+    console.log(props)
+    return <CSSTransition 
+                    appear mountOnEnter 
+                    timeout={duration} 
+                    in={props.visible}
+                    classNames={{  // animate使用: 在需要进行动画的元素上设置animate-animated类名
+                        exitActive: "animate__bounceOutLeft animate__animated",
+                        exitDone: "exit-done",
+                        enterActive: "animate__backInRight animate__animated",
+                        appearActive: "animate__backInRight animate__animated"
+                    }}
+                    >
+        {props.children}
     </CSSTransition>
 }
+function Comp1() {
+    return <div className="title animate__fast">
+        <h1>Comp1</h1>
+        <div>我是一个标题</div>
+    </div>
+}
 
-function Comp2(props) {
-    //mountOnEnter 只有in为 true时才挂载该组件  首次进入 enter时就挂载该
-   return <CSSTransition appear  mountOnEnter  timeout={duration} in={props.visible}>
-              <div className="title">
-                    <h1>Comp2</h1>
-                    <div>我是一个标题</div>
-              </div>
-    </CSSTransition>
+function Comp2() {
+     return <div className="titleanimate__fast">
+        <h1>Comp2</h1>
+        <div>我是一个标题</div>
+    </div>
+
 }
 export default function App() {
-    
+
     let [inProp, setInProp] = useState(false);
     return (
         <div className="container">
-           <div className="com-wrapper">
-           <Comp1 visible={inProp}></Comp1>
-            <Comp2 visible={!inProp}></Comp2>
-           </div>
+            <div className="com-wrapper">
+              <MyTransition visible={inProp}>
+                  <Comp1/>
+              </MyTransition>
+              <MyTransition visible={!inProp}>
+                  <Comp2/>
+              </MyTransition>
+            </div>
             <button onClick={() => {
                 setInProp(!inProp)
             }}> Click to Toggle </button>
