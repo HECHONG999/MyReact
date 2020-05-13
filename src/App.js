@@ -1,37 +1,38 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
-import "./App.css"
-import { Transition } from "react-transition-group"
-let duration = 3000;
 
+import { Transition, CSSTransition } from "react-transition-group";
+import "./App.css"
+let duration = 1000;
+
+
+function Comp1(props) {
+    // mountOnEnter属性: 子组件会根据父组件立即进行挂载, 如果父组件没挂载,子组件就不进行挂载
+   return <CSSTransition   mountOnEnter  timeout={duration} in={props.visible}>
+              <div className="title">
+                <h1>Comp1</h1>
+                <div>我是一个标题</div>
+              </div>
+    </CSSTransition>
+}
+
+function Comp2(props) {
+    //mountOnEnter 只有in为 true时才挂载该组件  首次进入 enter时就挂载该
+   return <CSSTransition appear  mountOnEnter  timeout={duration} in={props.visible}>
+              <div className="title">
+                    <h1>Comp2</h1>
+                    <div>我是一个标题</div>
+              </div>
+    </CSSTransition>
+}
 export default function App() {
-    const transitionStyles = {
-        entering: { opacity: 1 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0 },
-        exited:  { opacity: 0 },
-      };
+    
     let [inProp, setInProp] = useState(false);
     return (
-        <div>
-            {/* Transition只维护组件的状态 exited:已退出  enterd:已经进入  in为false，就不会挂载组件 mountOneEnter置有in为ttue时才挂载组件 unmountOnExit */}
-            <Transition in={inProp} timeout={{
-                                    appear: 500,
-                                    enter: 3000,
-                                    exit: 500,
-                                }}
-                addEndListener={(node, done) => {  //done()  立即变为结束转台
-                    node.addEventListener("transitionend", () => {
-
-                        console.log("过度动画结束了")
-                    })
-                }}
-            >
-                {state => {
-                    console.log(state)
-                    return <div style={ {...transitionStyles[state]}}>I'm a fade Transition!</div>
-                }}
-            </Transition>
+        <div className="container">
+           <div className="com-wrapper">
+           <Comp1 visible={inProp}></Comp1>
+            <Comp2 visible={!inProp}></Comp2>
+           </div>
             <button onClick={() => {
                 setInProp(!inProp)
             }}> Click to Toggle </button>
