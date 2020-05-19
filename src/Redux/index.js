@@ -1,31 +1,31 @@
-import {createStore} from "redux";
-
-const action = {
-    type: "increase",
-}
+import {createStore, bindActionCreators} from "redux";
+import * as TypeActions from "./action/action-type";
+import * as NumberActions from "./action/number-action"
 /**
  *  reducer 本质上是一个函数, 通过reducer改变数据
  * @param {*} state  store仓库中的数据 
  * @param {*} action  唯一描述改变数据的原因
  */
 function reducer(state, action) {
-    if(action.type == "increase") {
+    if(action.type == TypeActions.INCREASE) {
         return state + 1
-    } else if( action.type ==  "decrease") {
+    } else if( action.type == TypeActions.DECREASE) {
         return state - 1
-    } 
+    }  else if( action.type == TypeActions.SET) {
+        return  action.payload()
+    }
     return state;
 }
 
-const store = createStore(reducer, 10);   // 创建一个Stores数据仓库, 参数一: 改变数据的reducer 参数二: store数据仓库中默认赋值
+const store = createStore(reducer, 11);
 
-console.log(store.getState());
+//第一个参数，是action创建函数合并的对象，第二个参数是仓库的dispatch函数
+//得到一个新的对象，新对象中的属性名与第一个参数的属性名一致
+const bindActions = bindActionCreators(NumberActions, store.dispatch);
 
-store.dispatch(action);
+console.log(store.getState())
+//得到一个increase action，并直接分发到仓库,调用reducer 改变数据状态
+bindActions.getIncreaseAction()
 
-console.log(store.getState());
+console.log(store.getState())
 
-
-/**
- * action 描述数据改变原因，通过store.dispatch 向仓库中分发一个数据, 如果需改变仓库中的数据,则通过reducer 来告诉store仓库怎么更改，然后返回一个新的state
- */
