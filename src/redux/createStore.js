@@ -47,7 +47,7 @@ export default function (reducer, defaultState) {
                 isRemove = true;
         }
     }
-
+    // 创建仓库时需要分发一次dispatch,进行初始化数据 
     
 
     return {
