@@ -49,7 +49,9 @@ export default function (reducer, defaultState) {
     }
     // 创建仓库时需要分发一次dispatch,进行初始化数据 
     
-
+    dispatch({
+        type: `@@redux/INIT${getRandomString(7)}`
+    })
     return {
         getState,
         dispatch,
@@ -72,5 +74,5 @@ function isPlainObject(action) {
  * @param {*} length 
  */
 function getRandomString(length) {
-
+    return Math.random().toString(36).substr(length).split("").join(".");
 }
