@@ -22,6 +22,8 @@ export default function (reducer, defaultState) {
         if( action.type === undefined ) {
             throw new TypeError(" action must be prototype of type");
         }
+        // 调用dispatch时,需要传入一个action对象, 
+        // currentReducer是一个函数, 执行后返回的是一个对象,该对象的属性值是函数，描述如何改变仓库的数据
         currentState = currentReducer(currentState, action);
         // 每次分发时执行监听函数
         for(const listener of listeners) {
