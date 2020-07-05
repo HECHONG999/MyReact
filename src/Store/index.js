@@ -1,13 +1,25 @@
 import {createStore, applyMiddleware } from "redux";
 
 // export 导出的不同的action 
-import {createAddUserAction} from "./action/users"
+import {createAddUserAction, fetchUsers} from "./action/users"
+import { setLoginUserAction } from "./action/loginUserAction"
 import reducer from "./Reducer/index";
 import thunk from "redux-thunk";
 import logger from "redux-logger"
 
-const store = createStore(reducer, applyMiddleware(thunk, logger))
+const store = createStore(
+    reducer,
+     applyMiddleware(
+         thunk,
+          logger
+          )
+          )
+
+store.dispatch(setLoginUserAction([{id: 997999, pwd: "hfhfossks"}]))
 store.dispatch(createAddUserAction({name:"何冲", age: 19, hobbit: "dancing"}))
+store.dispatch(createAddUserAction({name:"何冲111111", age: 19, hobbit: "dancing"}))
+store.dispatch(fetchUsers())
+
 
 
 

@@ -1,6 +1,6 @@
 const appkey = "demo13_1545210570249"
 
-export async function getAllStudent() {
+export async function getAllStudents() {
     return await fetch("http://open.duyiedu.com/api/student/findAll?appkey=" + appkey + "").then(resp => {
         return resp.json()
     }).then(resp => {
