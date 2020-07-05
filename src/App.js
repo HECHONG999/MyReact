@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import "./Store/index"
+import React from 'react'
+import "./store/test"
 export default function App() {
     return (
         <div >
