@@ -40,8 +40,9 @@ export default class ValidationComp extends Component {
             })
         }),
         func: function (props,propName, componentName) {
+            console.log(props, propName, componentName)
            const result =  props[propName]
-
+            console.log(result)
             // 只能是 0 -- 100 的数字
             if( result < 0 || result > 100) {
                 return new Error(`invalid prop ${propName} in ${componentName} must is between 0 and 100`)
