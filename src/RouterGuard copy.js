@@ -49,7 +49,7 @@ export default class RouterGuard extends Component {
     // 参数二 回调函数，调用该函数并传递true，则表示进入到新页面，否则，不做任何操作
     handleConfirm = (msg, commitCallBack) => {
         // 通过调用beForeChange方法,导出commitCallBack放,进行路由守备判断
-       console.log(msg,commitCallBack)
+       
         // 首先要判断是否存在onBeforeChange
         if(this.props.onBeforeChange) {
             this.props.onBeforeChange && this.props.onBeforeChange(preLocation,location, action, commitCallBack,unBlock)
@@ -60,38 +60,9 @@ export default class RouterGuard extends Component {
     render() {
         return (
             <Router getUserConfirmation={ this.handleConfirm}>
-                {/* <GroupHelper onChange={this.props.onChange}> </GroupHelper> */}
-                <GroupComponent onChange={this.props.onChange} />
+                <GroupHelper onChange={this.props.onChange}> </GroupHelper>
                 {this.props.children}
             </Router>
         )
     }
 }
-
-class Group extends Component {
-    constructor(props) {
-        super(props)
-    }
-    
-    componentDidMount () {
-        let {history} = this.props;
-        unBlock = history.block((newLocation, act) => {
-            console.log("newLocation===", newLocation, act, this.props)
-            preLocation = this.props.location;
-            location = newLocation;
-            action = act;
-            console.log("阻塞函数执行了");
-
-            return "我是阻塞函数返回的消息"
-        })
-
-        this.listen = history.listen((newLocation, act) => {
-            console.log(newLocation, act)
-        })
-    }
-    render() {
-        return null
-    }
-}
-
-var GroupComponent = withRouter(Group)

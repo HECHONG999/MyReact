@@ -26,6 +26,7 @@ export default function App() {
             commit(true);
             unBlock()
 
+
         }} onChange={ (preLocation, location, action) => {
             console.log(`日志: 从组件页面${preLocation.pathname} --->> 到组件页面 ${location.pathname} 跳转方式${action}`)
         }}>
