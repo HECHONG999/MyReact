@@ -1,6 +1,7 @@
-import React from 'react'
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
+import React ,{Component} from 'react'
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import RouterGuard from "./RouterGuard"
+
 
 function PageA() {
     return (
@@ -33,6 +34,7 @@ export default function App() {
             <nav>
                 <Link to="/pageA">PageA</Link>
                 <Link to="/pageB">PageB</Link>
+
             </nav>
             <div>
                 <Route path="/pageA" component={PageA} />
