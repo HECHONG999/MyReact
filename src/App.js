@@ -1,7 +1,6 @@
 import React ,{Component} from 'react'
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-import matchPath from './react-router/matchPath';
-
+// import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Route} from "./react-router-dom"
 function PageA() {
     return (
         <h1>PageA</h1>
@@ -21,13 +20,14 @@ export default function App() {
     return (
 
         <Router>
-            <nav>
+            {/* hechong  */}
+            {/* <nav>
                 <Link to="/pageA">PageA</Link>
                 <Link to="/pageB">PageB</Link>
 
-            </nav>
+            </nav> */}
             <div>
-                <Route path="/pageA" component={PageA} />
+                <Route path="/pageA" component={PageA} ></Route>
                 <Route path="/pageB" component={PageB} />
             </div>
         </Router>
