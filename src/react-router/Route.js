@@ -68,7 +68,8 @@ export default class Route extends Component{
             location: value.location,
             match: this.matchRoute(value.location) 
         }
-        return <ctx.Provider value={ctxValue}>
+        // 再次创建上下文 提供给组件 上下文对象
+        return <ctx.Provider value={ctxValue}>  
             {this.renderChildren(ctxValue)}
         </ctx.Provider>
     }

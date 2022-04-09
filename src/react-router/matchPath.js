@@ -19,7 +19,7 @@ export default function matchPath(path,pathname, options) {
     groups = groups.splice(1);      // 得到匹配的分组结果
     let params = getParams(groups, keys);
     return {
-        isExact: pathname == result[0],
+        isExact: pathname === result[0],
         params,
         path,
         url: result[0]

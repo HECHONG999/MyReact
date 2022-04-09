@@ -1,2 +1,3 @@
 export {default as BrowserRouter} from "./BrowserRouter";
-export { Route } from "../react-router"
+export {default as Link} from "./Link"
+export { Route,Switch,WithRouter } from "../react-router"
