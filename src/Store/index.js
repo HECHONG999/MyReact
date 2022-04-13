@@ -1,19 +1,24 @@
 // import {createStore} from "redux";
-import createStore from "../redux/createStore"
+import {createStore, bindActionCreators} from "../redux/index"
 import * as  loginUserAction from "./action/loginUserAction"
 import * as user from "./action/users"
-import reducer from "./Reducer/index"
+import reducer from "./reducer/index"
 
 // console.log(reducer)
 const store = createStore(reducer);
 
 console.log(store, "++++++")
 
-store.dispatch(loginUserAction.setLoginUserAction({name: "何冲", age: 18, hobby: "basketball"}))
-store.dispatch(user.createAddUserAction({id: 3,name: "何冲", age: 18}))
+// store.dispatch(loginUserAction.setLoginUserAction({name: "何冲", age: 18, hobby: "basketball"}))
+// store.dispatch(user.createAddUserAction({id: 3,name: "何冲", age: 18}))
+let actionObj = {
+    createAddUserAction: user.createAddUserAction,
+    setLoginUserAction: loginUserAction.setLoginUserAction
+}
+let userAction = bindActionCreators(actionObj, store.dispatch)
+console.log("userAction===", userAction)
 console.log(store.getState())
 
-store.dispatch(user.createDelteUser(3))
 console.log(store.getState())
 
 

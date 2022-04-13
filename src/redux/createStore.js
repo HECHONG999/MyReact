@@ -32,7 +32,7 @@ export default function (reducer, defaultState) {
      * 添加一个监听器, 再次调用时取消监听
      * @param {*} listener  传入的一个匿名函数
      */
-    function subscribe(listener) { 
+    function subscribe(listener) {  // 发布 监听器
         if( typeof listener !== "function") {
             throw new TypeError(" listener must be a fucntion ");
         }
@@ -42,13 +42,13 @@ export default function (reducer, defaultState) {
             if( isRemove ) {
                 return 
             }
-            let index = listeners.indexOf(listener);
-                listeners.splice(index,1 ); // 从第index位开始截取，截取一位
+            let index = listeners.indexOf(listener);    // 得到当前监听器的索引
+                listeners.splice(index,1); // 从第index位开始截取, 删除一位,    splice会修改原数组
                 isRemove = true;
         }
     }
     // 创建仓库时需要分发一次dispatch,进行初始化数据 
-    
+    dispatch({type: getRandomString(7)});
 
     return {
         getState,
@@ -72,5 +72,5 @@ function isPlainObject(action) {
  * @param {*} length 
  */
 function getRandomString(length) {
-
+    return Math.random().toString(36).substr(2,length);
 }
