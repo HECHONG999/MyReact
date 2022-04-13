@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./Redux/index"
+import "./redux"
 export default function App() {
     return (
         <div >
