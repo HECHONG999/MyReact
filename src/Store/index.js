@@ -1,13 +1,9 @@
-// import {createStore} from "redux";
-import {createStore, bindActionCreators} from "../redux/index"
+// import {createStore, applyMiddleware, bindActionCreators} from "redux";
+import {createStore, bindActionCreators, applyMiddleware} from "../redux/index"
 import * as  loginUserAction from "./action/loginUserAction"
 import * as user from "./action/users"
 import reducer from "./reducer/index"
 
-// console.log(reducer)
-const store = createStore(reducer);
-
-console.log(store, "++++++")
 
 // store.dispatch(loginUserAction.setLoginUserAction({name: "何冲", age: 18, hobby: "basketball"}))
 // store.dispatch(user.createAddUserAction({id: 3,name: "何冲", age: 18}))
@@ -15,11 +11,34 @@ let actionObj = {
     createAddUserAction: user.createAddUserAction,
     setLoginUserAction: loginUserAction.setLoginUserAction
 }
-let userAction = bindActionCreators(actionObj, store.dispatch)
-console.log("userAction===", userAction)
-console.log(store.getState())
+const logger = store => {
+    // 返回一个dispatch创建函数
+    return (next)  => {
+        console.log("logger    中间件运行了 ===", next)
 
-console.log(store.getState())
+        return (action) => {
+            next(action)
+        }
+    }
+}
+
+const logger1 = store => {
+    // 返回一个dispatch创建函数
+    return (next)  => {
+        console.log("logger1  dispatch中间件运行了 ===", next)
+        // 返回一个dispatch函数
+        return (action) => {
+            console.log("logger1  中间件运行了 ===", action)
+            console.log("next===", next)
+            next(action)
+        }
+    }
+}
+const store = applyMiddleware(logger,logger1)(createStore)(reducer);
+const action = bindActionCreators(actionObj, store.dispatch)
+console.log(store)
+action.createAddUserAction({id: 3,name: "何冲", age: 18})
+console.log(store)
 
 
 
