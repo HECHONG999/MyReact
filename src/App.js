@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./Store/index"
+import "./store/index"
 export default function App() {
     return (
         <div >

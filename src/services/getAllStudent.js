@@ -1,4 +1,4 @@
-const appkey = "demo13_1545210570249"
+const appkey = "DUYI_HC7772_1553827271965"
 
 export async function getAllStudents() {
     return await fetch("http://open.duyiedu.com/api/student/findAll?appkey=" + appkey + "").then(resp => {

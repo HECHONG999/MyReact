@@ -3,7 +3,7 @@ import {createStore, applyMiddleware } from "redux";
 // export 导出的不同的action 
 import {createAddUserAction, fetchUsers} from "./action/users"
 import { setLoginUserAction } from "./action/loginUserAction"
-import reducer from "./Reducer/index";
+import reducer from "./reducer/index";
 import thunk from "redux-thunk";
 import logger from "redux-logger"
 
