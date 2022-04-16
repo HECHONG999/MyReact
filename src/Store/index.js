@@ -4,7 +4,8 @@ import {createStore, applyMiddleware } from "redux";
 import {createAddUserAction, fetchUsers} from "./action/users"
 import { setLoginUserAction } from "./action/loginUserAction"
 import reducer from "./reducer/index";
-import thunk from "redux-thunk";
+// import thunk from "redux-thunk";
+import thunk from "../redux-thunk";
 import logger from "redux-logger"
 
 const store = createStore(

@@ -28,7 +28,7 @@ export default (state = initialState, {type, payload}) => {
         case userAction.SETUSERS:
             return {
                 ...state,
-                datas: [...state.datas, payload]  // 先混合一下之前仓库中得数据，再添加新的数据
+                datas: [...state.datas, ...payload]  // 先混合一下之前仓库中得数据，再添加新的数据
             };
         case userAction.SETISLOADING:
             return {
