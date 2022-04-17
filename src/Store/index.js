@@ -11,6 +11,11 @@ let actionObj = {
     createAddUserAction: user.createAddUserAction,
     setLoginUserAction: loginUserAction.setLoginUserAction
 }
+/**
+ * 
+ * @param {*} store 
+ * @returns 
+ */
 const logger = store => {
     // 返回一个dispatch创建函数
     return (next)  => {
