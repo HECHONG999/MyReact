@@ -6,20 +6,67 @@ import { setLoginUserAction } from "./action/loginUserAction"
 import reducer from "./reducer/index";
 // import thunk from "redux-thunk";
 import thunk from "../redux-thunk";
+import promise from 'redux-promise'
 import logger from "redux-logger"
 
 const store = createStore(
     reducer,
      applyMiddleware(
-         thunk,
+         promise,
           logger
           )
           )
 
-store.dispatch(setLoginUserAction([{id: 997999, pwd: "hfhfossks"}]))
-store.dispatch(createAddUserAction({name:"何冲", age: 19, hobbit: "dancing"}))
-store.dispatch(createAddUserAction({name:"何冲111111", age: 19, hobbit: "dancing"}))
-store.dispatch(fetchUsers())
+// store.dispatch(setLoginUserAction([{id: 997999, pwd: "hfhfossks"}]))
+// store.dispatch(createAddUserAction({name:"何冲", age: 19, hobbit: "dancing"}))
+// store.dispatch(createAddUserAction({name:"何冲111111", age: 19, hobbit: "dancing"}))
+// store.dispatch(fetchUsers())
+
+function asyncGetData() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve('成哥')
+        }, 2000)
+    })
+}
+
+function* task() {
+    console.log("开始获取数据");
+    const data = yield asyncGetData();  // 得到一个 promise对象
+    debugger
+    console.log('数据====', data)
+}
+
+
+function run(generatorFun) {
+    const generator = generatorFun();
+    next()
+    /**
+     * 执行 next, 递归调用 生成器函数，知道调用结束
+     * @param {} nextValue 
+     * @returns 
+     */
+    function next(nextValue) {
+        const result = generator.next(nextValue);
+        if(result.done) {
+            return
+        }
+        let value = result.value; // 判断value的类型
+        if(typeof value.then === 'function') {
+            value.then(data => next(data))  // 把yield 异步请求的结果,赋值给 生成器里的 data
+        }else {
+            next(value)
+        }
+    }
+}
+
+run(task)
+
+// let generator = task()
+// let result = generator.next();
+// result.value.then(res => {
+//     generator.next(res);
+// })
 
 
 
